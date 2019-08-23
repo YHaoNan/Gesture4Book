@@ -198,6 +198,14 @@ public class GestureService extends Service {
     }
 
     @Override
+    public boolean onUnbind(Intent intent) {
+        wmanager.removeView(leftTouchBar);
+        wmanager.removeView(rightTouchBar);
+        wmanager.removeView(bottomTouchBar);
+        return super.onUnbind(intent);
+    }
+
+    @Override
     public IBinder onBind(Intent intent) {
         return new GestureServiceBinder();
     }

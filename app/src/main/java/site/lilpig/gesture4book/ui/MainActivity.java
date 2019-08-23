@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             service.bindBottomListener(bottomSettingBtn);
             widthSeek.setProgress(6);
             lengthSeek.setProgress(6);
-            edgePaddingSeek.setProgress(0);
+            edgePaddingSeek.setProgress(6);
         }
 
         @Override
@@ -57,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bindView();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(connection);
+        service = null;
     }
 
     @Override
@@ -86,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             acceptPermissionBtn.setVisibility(View.GONE);
             permissionImage.setImageResource(R.drawable.ic_smile);
             permissionTip.setText("我开始工作喽");
+
             if (service==null){
                 Intent intent = new Intent(MainActivity.this, GestureService.class);
                 bindService(intent,connection,BIND_AUTO_CREATE);
