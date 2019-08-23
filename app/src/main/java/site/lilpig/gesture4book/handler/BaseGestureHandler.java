@@ -1,11 +1,26 @@
 package site.lilpig.gesture4book.handler;
 
+import android.content.SharedPreferences;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import site.lilpig.gesture4book.Gesture4BookApplication;
+import site.lilpig.gesture4book.util.GestureHandlerSettingFactory;
+
 public abstract class BaseGestureHandler implements GestureHandler{
+    private Map<String,GestureHandlerSetting> settingMap;
     private GestureMetaData metaData;
-    public BaseGestureHandler(){
-
+    private SharedPreferences userSettingsFile;
+    public BaseGestureHandler(String tb,String dr){
+        userSettingsFile = Gesture4BookApplication.getInstance().openSharedPreference(tb,dr,this.getClass().getName());
+        settingMap = new HashMap<>();
+        if (settings()!=null)
+            for (GestureHandlerSetting setting:settings()){
+                settingMap.put(setting.getName(),setting);
+            }
     }
-
 
     @Override
     public void onActive(GestureMetaData metaData) {
@@ -22,9 +37,9 @@ public abstract class BaseGestureHandler implements GestureHandler{
         onExit();
     }
 
-    protected abstract void onHover(GestureMetaData metaData);
+    public abstract void onHover(GestureMetaData metaData);
 
-    protected abstract void onTrigger(GestureMetaData metaData);
+    public abstract void onTrigger(GestureMetaData metaData);
 
     @Override
     public void onExit() {
@@ -38,4 +53,13 @@ public abstract class BaseGestureHandler implements GestureHandler{
     }
 
     public abstract void onOver();
+
+    protected GestureHandlerSettingFactory createSettings(){
+        return new GestureHandlerSettingFactory(userSettingsFile);
+    }
+
+    protected Object getSetting(String name){
+        return settingMap.get(name).getValue();
+    }
+
 }

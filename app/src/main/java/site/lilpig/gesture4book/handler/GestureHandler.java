@@ -1,5 +1,7 @@
 package site.lilpig.gesture4book.handler;
 
+import java.util.List;
+
 /**
  * Programmer can implement a handler to handle a gesture operate.
  * A handler can launch a application,  controll the system volume...
@@ -23,4 +25,15 @@ public interface GestureHandler {
      * @return gestureType
      */
     int isActive();
+
+    /**
+     * Settings
+     * @return
+     */
+    List<GestureHandlerSetting> settings();
+
+    String name();
+
+    int icon();
+
 }

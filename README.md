@@ -2,6 +2,26 @@
 
 一个适合于阅读器的全面屏手势工具。使用悬浮窗+AccessibilityService的performGloablAction实现。
 
+### 未来更新
+- Touchbar透明度、边缘距离等设置持久化
+- 支持手势自定义事件
+- 手势处理器插件化（Lua）
+- 阅读灯控制（需要阅读器厂家支持）
+- 更多的手势处理器
+
+### 2019/8/23更新
+- 更新`TouchbarView`的`onTouchEvent`逻辑，手势的Hover事件更符合开发者维护手势处理器
+- 更新`GestureHandler`和`BaseGestureHandler`的API
+- 将手势的Hover和普通事件分开，而不是由Handler判断并处理
+- 所有自带的`GestureHandler`完全重写
+- 更新UI
+- 权限检测&设置
+- 手势处理器设置和设置持久化
+- 自定义透明度，边缘距离，长度和宽度
+- 优化操作 更易用
+
+手势处理器(GestureHandler)开发规则：[在这里](./GestureHandler.md)
+
 ### 起源
 最近买了个博阅的阅读器，这个阅读器很der，没有按钮（菜单、回退、HOME）。
 

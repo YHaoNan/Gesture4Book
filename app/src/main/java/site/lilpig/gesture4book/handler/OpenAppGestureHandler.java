@@ -3,23 +3,20 @@ package site.lilpig.gesture4book.handler;
 import java.util.List;
 
 import site.lilpig.gesture4book.R;
-import site.lilpig.gesture4book.service.KeyService;
 
-public class BackGestureHandler extends BaseGestureHandler {
-
-
-    public BackGestureHandler(String tb, String dr) {
+public class OpenAppGestureHandler extends BaseGestureHandler{
+    public OpenAppGestureHandler(String tb, String dr) {
         super(tb, dr);
     }
 
     @Override
     public void onHover(GestureMetaData metaData) {
-        KeyService.getKeyService().back();
+
     }
 
     @Override
     public void onTrigger(GestureMetaData metaData) {
-        KeyService.getKeyService().back();
+
     }
 
     @Override
@@ -29,16 +26,21 @@ public class BackGestureHandler extends BaseGestureHandler {
 
     @Override
     public List<GestureHandlerSetting> settings() {
-        return null;
+        return createSettings().add(
+                "packageName",
+                "App包名",
+                String.class,
+                "App的包名",
+                "site.lilpig.gesture4book").get();
     }
 
     @Override
     public String name() {
-        return "返回";
+        return "打开App";
     }
 
     @Override
     public int icon() {
-        return R.drawable.ic_arrow_back_black_24dp;
+        return R.drawable.ic_android_black_24dp;
     }
 }
