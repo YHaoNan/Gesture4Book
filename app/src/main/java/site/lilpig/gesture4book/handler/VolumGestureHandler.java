@@ -21,10 +21,13 @@ public class VolumGestureHandler extends BaseGestureHandler {
         if (audioManager == null) {
             audioManager = (AudioManager) metaData.context.getSystemService(Context.AUDIO_SERVICE);
         }
+
+        int uiFlag = ((Boolean)getSetting("showUi")) ? AudioManager.FLAG_SHOW_UI : 0;
+
         if (metaData.direction == GestureDirection.DIRE_LEFT || metaData.direction == GestureDirection.DIRE_TOP){
-            audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_RAISE,AudioManager.FLAG_SHOW_UI);
+            audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_RAISE,uiFlag);
         }else {
-            audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_LOWER,AudioManager.FLAG_SHOW_UI);
+            audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_LOWER,uiFlag);
         }
     }
 
@@ -64,6 +67,12 @@ public class VolumGestureHandler extends BaseGestureHandler {
                 Integer.class,
                 "在悬停状态下每隔多少 ·毫秒· 触发一次",
                 500
+        ).add(
+                "showUi",
+                "显示UI",
+                Boolean.class,
+                "触发时是否显示系统修改音量的栏",
+                true
         ).get();
     }
 
