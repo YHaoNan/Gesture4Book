@@ -55,4 +55,31 @@ public class KeyService extends AccessibilityService{
             performGlobalAction(GLOBAL_ACTION_LOCK_SCREEN);
         }
     }
+
+    public void splitScreen(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            performGlobalAction(GLOBAL_ACTION_TOGGLE_SPLIT_SCREEN);
+        }
+    }
+
+    public void notifications(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            performGlobalAction(GLOBAL_ACTION_NOTIFICATIONS);
+        }
+    }
+
+    public void screenShot(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            performGlobalAction(GLOBAL_ACTION_TAKE_SCREENSHOT);
+        }
+    }
+
+    public void quickSetting(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            performGlobalAction(GLOBAL_ACTION_QUICK_SETTINGS);
+        }
+    }
+
+
+
 }

@@ -1,5 +1,6 @@
 package site.lilpig.gesture4book.handler;
 
+
 import java.util.List;
 
 import site.lilpig.gesture4book.R;
@@ -8,6 +9,8 @@ import site.lilpig.gesture4book.support.GestureHandlerSetting;
 import site.lilpig.gesture4book.support.GestureMetaData;
 
 public class BackGestureHandler extends BaseGestureHandler {
+    public static String name = "返回";
+    public static int icon = R.drawable.ic_arrow_back_black_24dp;
 
 
     public BackGestureHandler(String tb, String dr) {
@@ -36,11 +39,11 @@ public class BackGestureHandler extends BaseGestureHandler {
 
     @Override
     public String name() {
-        return "返回";
+        return name;
     }
 
     @Override
     public int icon() {
-        return R.drawable.ic_arrow_back_black_24dp;
+        return icon;
     }
 }

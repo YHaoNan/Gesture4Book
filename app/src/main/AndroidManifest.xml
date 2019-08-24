@@ -33,6 +33,7 @@
                 android:resource="@xml/accessibility_config" />
         </service>
         <activity android:name=".ui.GestureHandlerSettingActivity"/>
+        <activity android:name=".ui.GestureHandlerSelectActivity"/>
     </application>
 
 </manifest>

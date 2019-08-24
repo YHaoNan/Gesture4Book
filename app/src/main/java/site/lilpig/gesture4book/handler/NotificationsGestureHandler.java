@@ -7,23 +7,24 @@ import site.lilpig.gesture4book.service.KeyService;
 import site.lilpig.gesture4book.support.GestureHandlerSetting;
 import site.lilpig.gesture4book.support.GestureMetaData;
 
-public class RecentAppGestureHandler extends BaseGestureHandler {
+public class NotificationsGestureHandler extends BaseGestureHandler{
 
-    public static String name = "最近应用";
-    public static int icon = R.drawable.ic_view_carousel_black_24dp;
+    public static String name = "打开通知";
+    public static int icon = R.drawable.ic_textsms_black_24dp;
 
-    public RecentAppGestureHandler(String tb, String dr) {
+    public NotificationsGestureHandler(String tb, String dr) {
         super(tb, dr);
     }
 
     @Override
     public void onHover(GestureMetaData metaData) {
-        KeyService.getKeyService().recentApp();
+        KeyService.getKeyService().notifications();
     }
 
     @Override
     public void onTrigger(GestureMetaData metaData) {
-        KeyService.getKeyService().recentApp();
+        KeyService.getKeyService().notifications();
+
     }
 
     @Override

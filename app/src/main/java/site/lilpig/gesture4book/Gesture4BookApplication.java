@@ -5,12 +5,17 @@ import android.content.SharedPreferences;
 
 import java.util.List;
 
+import site.lilpig.gesture4book.service.GestureService;
 import site.lilpig.gesture4book.support.GestureHandlerSetting;
 
 public class Gesture4BookApplication extends Application {
 
     private List<GestureHandlerSetting> currentSetting = null;
     private static Gesture4BookApplication instance;
+
+    private GestureService service;
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,6 +28,14 @@ public class Gesture4BookApplication extends Application {
 
     public void setCurrentSetting(List<GestureHandlerSetting> currentSetting) {
         this.currentSetting = currentSetting;
+    }
+
+    public void setService(GestureService service){
+        this.service = service;
+    }
+
+    public GestureService getService() {
+        return service;
     }
 
     public List<GestureHandlerSetting> getCurrentSetting() {

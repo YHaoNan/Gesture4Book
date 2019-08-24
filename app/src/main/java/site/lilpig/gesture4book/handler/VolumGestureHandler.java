@@ -12,6 +12,10 @@ import site.lilpig.gesture4book.support.GestureMetaData;
 import site.lilpig.gesture4book.support.GestureType;
 
 public class VolumGestureHandler extends BaseGestureHandler {
+
+    public static String name = "音量调节";
+    public static int icon = R.drawable.ic_volume_up_black_24dp;
+
     private AudioManager audioManager;
 
     public VolumGestureHandler(String tb, String dr) {
@@ -80,12 +84,12 @@ public class VolumGestureHandler extends BaseGestureHandler {
 
     @Override
     public String name() {
-        return "音量加减";
+        return name;
     }
 
     @Override
     public int icon() {
-        return R.drawable.ic_volume_up_black_24dp;
+        return icon;
     }
 
 }

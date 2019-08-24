@@ -1,6 +1,5 @@
 package site.lilpig.gesture4book.ui;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -8,17 +7,19 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import site.lilpig.gesture4book.R;
-import site.lilpig.gesture4book.adapter.TouchBarHandlerSelectAdapter;
+import site.lilpig.gesture4book.adapter.GestureHandlerSelectListAdapter;
 import site.lilpig.gesture4book.handler.GestureHandler;
+import site.lilpig.gesture4book.service.GestureService;
 
-public class TouchBarHandlerSettingDialog extends BaseDialog {
+public class GestureHandlerSelectDialog extends BaseDialog {
+    private final Context context;
     private ListView handlerList;
-    private TouchBarHandlerSelectAdapter adapter;
+    private GestureHandlerSelectListAdapter adapter;
 
-    public TouchBarHandlerSettingDialog(Context context, GestureHandler[] handlers) {
+    public GestureHandlerSelectDialog(String tb,Context context, GestureHandler[] handlers) {
         super(context);
-        this.adapter = new TouchBarHandlerSelectAdapter(this,context,handlers);
+        this.context = context;
+        this.adapter = new GestureHandlerSelectListAdapter(tb,this,context,handlers);
     }
 
     @Override

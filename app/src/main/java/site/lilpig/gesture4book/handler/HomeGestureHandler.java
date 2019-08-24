@@ -8,6 +8,8 @@ import site.lilpig.gesture4book.support.GestureHandlerSetting;
 import site.lilpig.gesture4book.support.GestureMetaData;
 
 public class HomeGestureHandler extends BaseGestureHandler {
+    public static String name = "HOME";
+    public static int icon = R.drawable.ic_home_black_24dp;
 
     public HomeGestureHandler(String tb, String dr) {
         super(tb, dr);
@@ -34,12 +36,12 @@ public class HomeGestureHandler extends BaseGestureHandler {
 
     @Override
     public String name() {
-        return "HOME";
+        return name;
     }
 
     @Override
     public int icon() {
-        return R.drawable.ic_home_black_24dp;
+        return icon;
     }
 
 }

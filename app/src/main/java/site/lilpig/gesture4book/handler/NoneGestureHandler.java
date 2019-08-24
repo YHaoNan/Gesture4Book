@@ -7,6 +7,8 @@ import site.lilpig.gesture4book.support.GestureHandlerSetting;
 import site.lilpig.gesture4book.support.GestureMetaData;
 
 public class NoneGestureHandler implements GestureHandler{
+    public static String name = "无";
+    public static int icon = R.drawable.ic_do_not_disturb_alt_black_24dp;
 
     @Override
     public void onActive(GestureMetaData metaData) {
@@ -30,11 +32,11 @@ public class NoneGestureHandler implements GestureHandler{
 
     @Override
     public String name() {
-        return "无";
+        return name;
     }
 
     @Override
     public int icon() {
-        return R.drawable.ic_do_not_disturb_alt_black_24dp;
+        return icon;
     }
 }

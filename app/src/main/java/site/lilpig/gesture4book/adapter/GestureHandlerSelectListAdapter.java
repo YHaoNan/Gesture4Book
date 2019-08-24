@@ -15,15 +15,19 @@ import java.util.List;
 import site.lilpig.gesture4book.Gesture4BookApplication;
 import site.lilpig.gesture4book.R;
 import site.lilpig.gesture4book.handler.GestureHandler;
+import site.lilpig.gesture4book.service.GestureService;
 import site.lilpig.gesture4book.support.GestureHandlerSetting;
+import site.lilpig.gesture4book.ui.GestureHandlerSelectActivity;
 import site.lilpig.gesture4book.ui.GestureHandlerSettingActivity;
 
-public class TouchBarHandlerSelectAdapter extends BaseAdapter {
+public class GestureHandlerSelectListAdapter extends BaseAdapter {
     private static String[] titles = {"左滑","上滑","右滑","下滑","左滑悬停","上滑悬停","右滑悬停","下滑悬停"};
+    private final String tb;
     private GestureHandler[] handlers;
     private Context context;
     private Dialog dialog;
-    public TouchBarHandlerSelectAdapter(Dialog dialog,Context context, GestureHandler[] handlers){
+    public GestureHandlerSelectListAdapter(String tb,Dialog dialog, Context context, GestureHandler[] handlers){
+        this.tb = tb;
         this.context = context;
         this.handlers = handlers;
         this.dialog = dialog;
@@ -44,7 +48,7 @@ public class TouchBarHandlerSelectAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if (view == null){
             view = View.inflate(context, R.layout.item_handler_select,null);
@@ -82,6 +86,17 @@ public class TouchBarHandlerSelectAdapter extends BaseAdapter {
                 });
                 holder.handlerSetting.setVisibility(View.VISIBLE);
             }
+            holder.handlerChange.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    Intent intent = new Intent(context, GestureHandlerSelectActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("dr",i);
+                    intent.putExtra("tb",tb);
+                    context.startActivity(intent);
+                }
+            });
             holder.direcitionAndType.setText(titles[i]);
             holder.handlerName.setText(handler.name());
             holder.handlerIcon.setImageResource(handler.icon());
