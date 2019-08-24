@@ -8,10 +8,11 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import site.lilpig.gesture4book.R;
 import site.lilpig.gesture4book.adapter.TouchBarHandlerSelectAdapter;
 import site.lilpig.gesture4book.handler.GestureHandler;
 
-public class TouchBarHandlerSettingDialog extends Dialog {
+public class TouchBarHandlerSettingDialog extends BaseDialog {
     private ListView handlerList;
     private TouchBarHandlerSelectAdapter adapter;
 
@@ -24,10 +25,9 @@ public class TouchBarHandlerSettingDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        getWindow().setBackgroundDrawableResource(android.R.color.white);
         handlerList = new ListView(getContext());
+        handlerList.setPadding(20,20,20,20);
         LinearLayout.LayoutParams paramsOfList = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        paramsOfList.setMargins(20,20,20,20);
         addContentView(handlerList,paramsOfList);
         handlerList.setAdapter(adapter);
     }

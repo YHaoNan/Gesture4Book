@@ -78,6 +78,7 @@ public class GestureService extends Service {
         @Override
         public void onClick(View view) {
             TouchBarHandlerSettingDialog dialog = new TouchBarHandlerSettingDialog(GestureService.this,leftHandlers);
+            dialog.setTitle("左侧操作");
             dialog.show();
         }
     };
@@ -86,6 +87,7 @@ public class GestureService extends Service {
         @Override
         public void onClick(View view) {
             TouchBarHandlerSettingDialog dialog = new TouchBarHandlerSettingDialog(GestureService.this,rightHandlers);
+            dialog.setTitle("右侧操作");
             dialog.show();
         }
     };
@@ -94,6 +96,7 @@ public class GestureService extends Service {
         @Override
         public void onClick(View view) {
             TouchBarHandlerSettingDialog dialog = new TouchBarHandlerSettingDialog(GestureService.this,bottomHandlers);
+            dialog.setTitle("底部操作");
             dialog.show();
         }
     };

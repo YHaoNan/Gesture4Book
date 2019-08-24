@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             service.bindBottomListener(bottomSettingBtn);
             widthSeek.setProgress(6);
             lengthSeek.setProgress(6);
-            edgePaddingSeek.setProgress(6);
+            edgePaddingSeek.setProgress(0);
         }
 
         @Override
