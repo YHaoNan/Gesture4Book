@@ -14,7 +14,7 @@ import java.util.List;
 import site.lilpig.gesture4book.Gesture4BookApplication;
 import site.lilpig.gesture4book.R;
 import site.lilpig.gesture4book.adapter.GestureHandlerSettingAdapter;
-import site.lilpig.gesture4book.handler.GestureHandlerSetting;
+import site.lilpig.gesture4book.support.GestureHandlerSetting;
 
 public class GestureHandlerSettingActivity extends AppCompatActivity {
     private List<GestureHandlerSetting> settings;

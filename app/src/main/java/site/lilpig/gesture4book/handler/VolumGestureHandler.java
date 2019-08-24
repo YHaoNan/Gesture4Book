@@ -1,13 +1,15 @@
 package site.lilpig.gesture4book.handler;
 
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 
 import java.util.List;
 
 import site.lilpig.gesture4book.R;
-import site.lilpig.gesture4book.util.DisplayUtil;
+import site.lilpig.gesture4book.support.GestureDirection;
+import site.lilpig.gesture4book.support.GestureHandlerSetting;
+import site.lilpig.gesture4book.support.GestureMetaData;
+import site.lilpig.gesture4book.support.GestureType;
 
 public class VolumGestureHandler extends BaseGestureHandler {
     private AudioManager audioManager;
@@ -36,7 +38,7 @@ public class VolumGestureHandler extends BaseGestureHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (isActive()==GestureType.TYPE_HOVER){
+                while (isActive()== GestureType.TYPE_HOVER){
                     changeVolum(metaData);
                     try {
                         Thread.sleep((Integer) getSetting("triggerInterval"));

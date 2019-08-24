@@ -1,4 +1,4 @@
-package site.lilpig.gesture4book.handler;
+package site.lilpig.gesture4book.support;
 
 import android.content.Context;
 

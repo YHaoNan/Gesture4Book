@@ -1,4 +1,4 @@
-package site.lilpig.gesture4book.handler;
+package site.lilpig.gesture4book.support;
 
 public class GestureDirection {
     public static final int DIRE_LEFT = 0;

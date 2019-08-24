@@ -3,6 +3,8 @@ package site.lilpig.gesture4book.handler;
 import java.util.List;
 
 import site.lilpig.gesture4book.R;
+import site.lilpig.gesture4book.support.GestureHandlerSetting;
+import site.lilpig.gesture4book.support.GestureMetaData;
 
 public class NoneGestureHandler implements GestureHandler{
 

@@ -9,15 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.List;
 
 import site.lilpig.gesture4book.Gesture4BookApplication;
 import site.lilpig.gesture4book.R;
 import site.lilpig.gesture4book.handler.GestureHandler;
-import site.lilpig.gesture4book.handler.GestureHandlerSetting;
+import site.lilpig.gesture4book.support.GestureHandlerSetting;
 import site.lilpig.gesture4book.ui.GestureHandlerSettingActivity;
 
 public class TouchBarHandlerSelectAdapter extends BaseAdapter {

@@ -5,16 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import androidx.annotation.RequiresApi;
 import java.util.Date;
 
-import site.lilpig.gesture4book.handler.GestureDirection;
+import site.lilpig.gesture4book.support.GestureDirection;
 import site.lilpig.gesture4book.handler.GestureHandler;
-import site.lilpig.gesture4book.handler.GestureMetaData;
-import site.lilpig.gesture4book.handler.GestureType;
+import site.lilpig.gesture4book.support.GestureMetaData;
+import site.lilpig.gesture4book.support.GestureType;
 import site.lilpig.gesture4book.util.LoggerFactory;
 import site.lilpig.gesture4book.util.DisplayUtil;
 

@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import java.util.ArrayList;
 import java.util.List;
 
-import site.lilpig.gesture4book.handler.GestureHandlerSetting;
+import site.lilpig.gesture4book.support.GestureHandlerSetting;
 
 public class GestureHandlerSettingFactory {
     private final SharedPreferences s;

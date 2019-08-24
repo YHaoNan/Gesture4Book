@@ -4,7 +4,8 @@ import java.util.List;
 
 import site.lilpig.gesture4book.R;
 import site.lilpig.gesture4book.service.KeyService;
-import site.lilpig.gesture4book.util.GestureHandlerSettingFactory;
+import site.lilpig.gesture4book.support.GestureHandlerSetting;
+import site.lilpig.gesture4book.support.GestureMetaData;
 
 public class RecentAppGestureHandler extends BaseGestureHandler {
 

@@ -1,7 +1,6 @@
 package site.lilpig.gesture4book.adapter;
 
 import android.content.Context;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -17,9 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import site.lilpig.gesture4book.R;
-import site.lilpig.gesture4book.handler.GestureHandler;
-import site.lilpig.gesture4book.handler.GestureHandlerSetting;
-import site.lilpig.gesture4book.service.GestureService;
+import site.lilpig.gesture4book.support.GestureHandlerSetting;
 
 public class GestureHandlerSettingAdapter extends BaseAdapter {
     private List<GestureHandlerSetting> settings;

@@ -1,13 +1,11 @@
 package site.lilpig.gesture4book;
 
-import android.accessibilityservice.AccessibilityService;
 import android.app.Application;
 import android.content.SharedPreferences;
 
 import java.util.List;
 
-import site.lilpig.gesture4book.handler.GestureHandlerSetting;
-import site.lilpig.gesture4book.handler.GestureType;
+import site.lilpig.gesture4book.support.GestureHandlerSetting;
 
 public class Gesture4BookApplication extends Application {
 
