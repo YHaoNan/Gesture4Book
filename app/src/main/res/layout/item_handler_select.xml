@@ -30,4 +30,9 @@
         android:text="设置"
         android:layout_width="60dp"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/ihl_handler_change"
+        android:text="修改"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content" />
 </LinearLayout>

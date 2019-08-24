@@ -12,10 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.util.List;
 
 import site.lilpig.gesture4book.Gesture4BookApplication;
 import site.lilpig.gesture4book.R;
 import site.lilpig.gesture4book.handler.GestureHandler;
+import site.lilpig.gesture4book.handler.GestureHandlerSetting;
 import site.lilpig.gesture4book.ui.GestureHandlerSettingActivity;
 
 public class TouchBarHandlerSelectAdapter extends BaseAdapter {
@@ -53,33 +55,38 @@ public class TouchBarHandlerSelectAdapter extends BaseAdapter {
             holder.handlerIcon = view.findViewById(R.id.ihl_handler_icon);
             holder.handlerName = view.findViewById(R.id.ihl_handler_name);
             holder.handlerSetting = view.findViewById(R.id.ihl_handler_setting);
+            holder.handlerChange = view.findViewById(R.id.ihl_handler_change);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
         }
 
         final GestureHandler handler = handlers[i];
+
         if (handler == null){
             view.setVisibility(View.GONE);
         }else {
             view.setVisibility(View.VISIBLE);
-            holder.direcitionAndType.setText(titles[i]);
-            holder.handlerName.setText(handler.name());
-            holder.handlerIcon.setImageResource(handler.icon());
-            holder.handlerSetting.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (handler.settings() == null){
-                        Toast.makeText(context, "该手势操作没有设置", Toast.LENGTH_SHORT).show();
-                    }else {
+            List<GestureHandlerSetting> handlerSettings = handler.settings();
+            if (handlerSettings == null)
+                holder.handlerSetting.setVisibility(View.GONE);
+            else{
+
+                holder.handlerSetting.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                         dialog.dismiss();
                         Intent intent = new Intent(context, GestureHandlerSettingActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         Gesture4BookApplication.getInstance().setCurrentSetting(handler.settings());
                         context.startActivity(intent);
                     }
-                }
-            });
+                });
+                holder.handlerSetting.setVisibility(View.VISIBLE);
+            }
+            holder.direcitionAndType.setText(titles[i]);
+            holder.handlerName.setText(handler.name());
+            holder.handlerIcon.setImageResource(handler.icon());
         }
         return view;
     }
@@ -88,6 +95,7 @@ public class TouchBarHandlerSelectAdapter extends BaseAdapter {
         public TextView handlerName;
         public ImageView handlerIcon;
         public Button handlerSetting;
+        public Button handlerChange;
 
         public ViewHolder(){
 
