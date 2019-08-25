@@ -7,6 +7,7 @@ public class BuiltInHandlers {
             HomeGestureHandler.class,
             RecentAppGestureHandler.class,
             VolumGestureHandler.class,
-            NotificationsGestureHandler.class
+            NotificationsGestureHandler.class,
+            ExampleGestureHandler.class
     };
 }

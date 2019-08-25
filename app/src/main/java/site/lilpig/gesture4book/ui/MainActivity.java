@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import site.lilpig.gesture4book.R;
 import site.lilpig.gesture4book.service.GestureService;
+import site.lilpig.gesture4book.support.DefaultConfig;
+import site.lilpig.gesture4book.util.ConfigUtil;
 import site.lilpig.gesture4book.util.MyProgressChangeListener;
 import site.lilpig.gesture4book.util.PermissionUtil;
 
@@ -41,9 +43,11 @@ public class MainActivity extends AppCompatActivity {
             service.bindLeftListener(leftSettingBtn);
             service.bindRightListener(rightSettingBtn);
             service.bindBottomListener(bottomSettingBtn);
-            widthSeek.setProgress(6);
-            lengthSeek.setProgress(6);
-            edgePaddingSeek.setProgress(0);
+            widthSeek.setProgress(ConfigUtil.getWidth());
+            lengthSeek.setProgress(ConfigUtil.getLength());
+            edgePaddingSeek.setProgress(ConfigUtil.getEdgePadding());
+            alphaSeek.setProgress(ConfigUtil.getAlpha());
+            Log.i("MainActivity","Service binded!");
         }
 
         @Override
@@ -63,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ConfigUtil.setAlpha(alphaSeek.getProgress());
+        ConfigUtil.setEdgePadding(edgePaddingSeek.getProgress());
+        ConfigUtil.setWidth(widthSeek.getProgress());
+        ConfigUtil.setLength(lengthSeek.getProgress());
+        Log.i("MainActivity","Destory...");
         unbindService(connection);
         service = null;
     }

@@ -2,6 +2,7 @@ package site.lilpig.gesture4book.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.ColorFilter;
 import android.graphics.PixelFormat;
 import android.os.Binder;
 import android.os.Build;
@@ -21,6 +22,7 @@ import site.lilpig.gesture4book.handler.NotificationsGestureHandler;
 import site.lilpig.gesture4book.handler.RecentAppGestureHandler;
 import site.lilpig.gesture4book.handler.VolumGestureHandler;
 import site.lilpig.gesture4book.ui.GestureHandlerSelectDialog;
+import site.lilpig.gesture4book.util.ConfigUtil;
 import site.lilpig.gesture4book.util.DisplayUtil;
 import site.lilpig.gesture4book.view.TouchBarView;
 
@@ -41,6 +43,7 @@ public class GestureService extends Service {
     GestureHandler[] rightHandlers = new GestureHandler[8];
     GestureHandler[] bottomHandlers = new GestureHandler[8];
 
+    private boolean handlerInited = false;
     public static final String[] DRS = {
             "left","top","right","bottom","lefthover","tophover","righthover","bottomhover"
     };
@@ -71,6 +74,9 @@ public class GestureService extends Service {
 
         public void bindBottomListener(Button button){
             button.setOnClickListener(bottomBarHandlerSelectListener);
+        }
+        public void saveGestureStateHandler(){
+            GestureService.this.saveGestureHandlerState();
         }
     }
 
@@ -107,31 +113,47 @@ public class GestureService extends Service {
     public void onCreate() {
         super.onCreate();
         Gesture4BookApplication.getInstance().setService(this);
-        initHandlers();
         createFloatTouchBar();
+        initHandlers();
     }
 
     private void initHandlers() {
-        leftHandlers = new GestureHandler[]{
-                null, new NoneGestureHandler(), new BackGestureHandler("left", "right"), new NoneGestureHandler(),
-                null, new VolumGestureHandler("left", "uphover"), new NoneGestureHandler(), new VolumGestureHandler("left", "downhover")
-        };
-        rightHandlers = new GestureHandler[]{
-                new NotificationsGestureHandler("right","left"),new NoneGestureHandler(),null,new NoneGestureHandler(),
-                new NoneGestureHandler(),new VolumGestureHandler("right","uphover"),null,new VolumGestureHandler("right","downhover")
-        };
-        bottomHandlers = new GestureHandler[]{
-                new NoneGestureHandler(),new HomeGestureHandler("bottom","up"),new NoneGestureHandler(),null,
-                new NoneGestureHandler(),new RecentAppGestureHandler("bottom","uphover"),new NoneGestureHandler(),null
-        };
+        setHandler(1,"left",ConfigUtil.getLeftTop());
+        setHandler(5,"left",ConfigUtil.getLeftTopHover());
+        setHandler(2,"left",ConfigUtil.getLeftRight());
+        setHandler(6,"left",ConfigUtil.getLeftRightHover());
+        setHandler(3,"left",ConfigUtil.getLeftBottom());
+        setHandler(7,"left",ConfigUtil.getLeftBottomHover());
+        setHandler(0,"right",ConfigUtil.getRightLeft());
+        setHandler(4,"right",ConfigUtil.getRightLeftHover());
+        setHandler(1,"right",ConfigUtil.getRightTop());
+        setHandler(5,"right",ConfigUtil.getRightTopHover());
+        setHandler(3,"right",ConfigUtil.getRightBottom());
+        setHandler(7,"right",ConfigUtil.getRightBottomHover());
+        setHandler(0,"bottom",ConfigUtil.getBottomLeft());
+        setHandler(4,"bottom",ConfigUtil.getBottomLeftHover());
+        setHandler(1,"bottom",ConfigUtil.getBottomTop());
+        setHandler(5,"bottom",ConfigUtil.getBottomTopHover());
+        setHandler(2,"bottom",ConfigUtil.getBottomRight());
+        setHandler(6,"bottom",ConfigUtil.getBottomRightHover());
+        handlerInited = true;
     }
 
+    public boolean setHandler(int index,String tb,String clzName){
+        try {
+            return setHandler(index,tb, (Class<GestureHandler>) Class.forName(clzName));
+        } catch (ClassNotFoundException e) {
+            Toast.makeText(this, "找不到处理器："+clzName, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
     public boolean setHandler(int index,String tb,Class<GestureHandler> handlerClass){
         try {
             GestureHandler handler = handlerClass.getConstructor(String.class,String.class).newInstance(tb,DRS[index]);
             return setHandler(index,tb,handler);
         }catch (Exception e){
-            Toast.makeText(this, "修改失败："+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "修改失败："+e.getMessage()+",index "+ index+",tb "+tb+", handlerClass "+handlerClass.getSimpleName(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
             return false;
         }
     }
@@ -175,7 +197,29 @@ public class GestureService extends Service {
         rightParams = initLayoutParams(Gravity.RIGHT|Gravity.CENTER_VERTICAL,0,0,0,0);
         bottomTouchBar = new TouchBarView(getApplicationContext());
         bottomParams = initLayoutParams(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,0,0,0,0);
-        updateTouchBarHandlers();
+        leftTouchBar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                leftBarHandlerSelectListener.onClick(view);
+                return false;
+            }
+        });
+
+        rightTouchBar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                rightBarHandlerSelectListener.onClick(view);
+                return false;
+            }
+        });
+
+        bottomTouchBar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                bottomBarHandlerSelectListener.onClick(view);
+                return false;
+            }
+        });
         wmanager.addView(leftTouchBar,leftParams);
         wmanager.addView(rightTouchBar,rightParams);
         wmanager.addView(bottomTouchBar,bottomParams);
@@ -191,6 +235,8 @@ public class GestureService extends Service {
         view.setTopHoverHandler(handlers[5]);
         view.setRightHoverHandler(handlers[6]);
         view.setBottomHoverHandler(handlers[7]);
+        if (handlerInited)
+            saveGestureHandlerState();
     }
 
     public void updateTouchBarHandlers(){
@@ -238,6 +284,26 @@ public class GestureService extends Service {
         return super.onUnbind(intent);
     }
 
+    public void saveGestureHandlerState(){
+        ConfigUtil.setLeftTop(leftHandlers[1].getClass().getName());
+        ConfigUtil.setLeftTopHover(leftHandlers[5].getClass().getName());
+        ConfigUtil.setLeftRight(leftHandlers[2].getClass().getName());
+        ConfigUtil.setLeftRightHover(leftHandlers[6].getClass().getName());
+        ConfigUtil.setLeftBottom(leftHandlers[3].getClass().getName());
+        ConfigUtil.setLeftBottomHover(leftHandlers[7].getClass().getName());
+        ConfigUtil.setRightLeft(rightHandlers[0].getClass().getName());
+        ConfigUtil.setRightLeftHover(rightHandlers[4].getClass().getName());
+        ConfigUtil.setRightTop(rightHandlers[1].getClass().getName());
+        ConfigUtil.setRightTopHover(rightHandlers[5].getClass().getName());
+        ConfigUtil.setRightBottom(rightHandlers[3].getClass().getName());
+        ConfigUtil.setRightBottomHover(rightHandlers[7].getClass().getName());
+        ConfigUtil.setBottomLeft(bottomHandlers[0].getClass().getName());
+        ConfigUtil.setBottomLeftHover(bottomHandlers[4].getClass().getName());
+        ConfigUtil.setBottomTop(bottomHandlers[1].getClass().getName());
+        ConfigUtil.setBottomTopHover(bottomHandlers[5].getClass().getName());
+        ConfigUtil.setBottomRight(bottomHandlers[2].getClass().getName());
+        ConfigUtil.setBottomRightHover(bottomHandlers[6].getClass().getName());
+    }
     @Override
     public IBinder onBind(Intent intent) {
         return new GestureServiceBinder();

@@ -6,23 +6,12 @@ import site.lilpig.gesture4book.R;
 import site.lilpig.gesture4book.support.GestureHandlerSetting;
 import site.lilpig.gesture4book.support.GestureMetaData;
 
-public class NoneGestureHandler implements GestureHandler{
+public class NoneGestureHandler extends BaseGestureHandler {
     public static String name = "无";
     public static int icon = R.drawable.ic_do_not_disturb_alt_black_24dp;
 
-    @Override
-    public void onActive(GestureMetaData metaData) {
-
-    }
-
-    @Override
-    public void onExit() {
-
-    }
-
-    @Override
-    public int isActive() {
-        return 0;
+    public NoneGestureHandler(String tb, String dr) {
+        super(tb, dr);
     }
 
     @Override
@@ -38,5 +27,20 @@ public class NoneGestureHandler implements GestureHandler{
     @Override
     public int icon() {
         return icon;
+    }
+
+    @Override
+    public void onHover(GestureMetaData metaData) {
+
+    }
+
+    @Override
+    public void onTrigger(GestureMetaData metaData) {
+
+    }
+
+    @Override
+    public void onOver() {
+
     }
 }

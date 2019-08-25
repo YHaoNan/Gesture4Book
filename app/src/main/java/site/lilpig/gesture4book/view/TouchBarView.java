@@ -27,6 +27,8 @@ public class TouchBarView extends View{
     private int triggerHoverTime = 500;
 
     private Paint paint;
+    private OnLongClickListener listener;
+
     public TouchBarView(Context context) {
         super(context);
         paint = new Paint();
@@ -72,6 +74,10 @@ public class TouchBarView extends View{
         postInvalidate();
     }
 
+
+    public void setOnLongClickListener(OnLongClickListener longClickListener){
+        this.listener = longClickListener;
+    }
 
     private float startX;
     private float startY;
@@ -131,8 +137,12 @@ public class TouchBarView extends View{
                 isHoverHandlerInvoked = true;
             }
         }else if (actionId == MotionEvent.ACTION_UP){
-            if (currentDirection == GestureDirection.DIRE_NONE)
+            if (currentDirection == GestureDirection.DIRE_NONE){
+                if (new Date().getTime()-curHandlerStartTime >= triggerHoverTime && listener!=null){
+                    listener.onLongClick(this);
+                }
                 return false;
+            }
             if (!isHoverHandlerInvoked){
                 //Normal gesture
                 GestureHandler handler = normalHandlers[currentDirection];

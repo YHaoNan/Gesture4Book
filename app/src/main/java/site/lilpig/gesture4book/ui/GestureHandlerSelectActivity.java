@@ -66,7 +66,7 @@ public class GestureHandlerSelectActivity extends AppCompatActivity {
         fragments.add(new AppListFragment(new OnGestureHandlerSelectedListener() {
             @Override
             public void onSelect(Class<GestureHandler> handlerClass, String...arg) {
-                OpenAppGestureHandler handler = new OpenAppGestureHandler(tb, GestureService.DRS[dr],arg[0]);
+                OpenAppGestureHandler handler = new OpenAppGestureHandler(tb, GestureService.DRS[dr]);
                 handler.settings().get(0).setValue(arg[1]);
                 boolean bol = Gesture4BookApplication.getInstance().getService().setHandler(dr,tb,handler);
                 if (bol)

@@ -16,7 +16,7 @@ public abstract class BaseGestureHandler implements GestureHandler{
     private GestureMetaData metaData;
     private SharedPreferences userSettingsFile;
     public BaseGestureHandler(String tb,String dr){
-        userSettingsFile = Gesture4BookApplication.getInstance().openSharedPreference(tb,dr,this.getClass().getName());
+        userSettingsFile = Gesture4BookApplication.getInstance().getSettingSharedPreferenceByTouchbarAndDirection(tb,dr,this.getClass().getName());
         settingMap = new HashMap<>();
         if (settings()!=null)
             for (GestureHandlerSetting setting:settings()){

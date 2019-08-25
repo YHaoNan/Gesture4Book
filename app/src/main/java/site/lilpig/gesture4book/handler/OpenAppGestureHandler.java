@@ -3,6 +3,7 @@ package site.lilpig.gesture4book.handler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
 import java.util.List;
@@ -21,9 +22,17 @@ public class OpenAppGestureHandler extends BaseGestureHandler{
     public String currentAppName;
     public Drawable currentAppIcon;
 
-    public OpenAppGestureHandler(String tb, String dr,String name){
+    public OpenAppGestureHandler(String tb, String dr){
         super(tb, dr);
-        this.currentAppName = "打开"+name;
+        String packageName = (String) getSetting("packageName");
+        PackageManager packageManager = Gesture4BookApplication.getInstance().getPackageManager();
+        String label = null;
+        try {
+            label = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(packageName,packageManager.GET_META_DATA));
+            this.currentAppName = "打开"+label;
+        } catch (PackageManager.NameNotFoundException e) {
+            this.currentAppName = "应用被卸载，请重新设置";
+        }
     }
 
     public void lunchApp(Context context){

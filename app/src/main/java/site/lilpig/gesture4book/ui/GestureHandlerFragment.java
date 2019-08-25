@@ -66,7 +66,7 @@ public class GestureHandlerFragment extends Fragment {
         handlerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                listener.onSelect(handlers.get(i),null);
+                listener.onSelect(handlers.get(i),"");
             }
         });
         return root;
