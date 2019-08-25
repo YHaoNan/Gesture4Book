@@ -9,8 +9,9 @@
 - 操作简单 支持大部分操作
 - 免费轻量开源无广告
 
-- [Preview版下载](./app/release/app-release.apk)
-- [使用手册（必看）](./handbook.md)
+### [Preview版下载](https://github.com/YHaoNan/Gesture4Book/raw/master/app/release/app-release.apk)
+
+### [使用手册（必看）](./handbook.md)
 
 ### 2019/8/25更新
 - 支持设置持久化
