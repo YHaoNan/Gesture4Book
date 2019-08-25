@@ -11,6 +11,8 @@
 
 ### [Preview版下载](https://github.com/YHaoNan/Gesture4Book/raw/master/app-debug.apk)
 
+**Preview版只是放出预览 该版本可以在博阅T80D下正常工作 但不会维护更新 请随时关注该仓库获取新版 **
+
 ### [使用手册（必看）](./handbook.md)
 
 ### 2019/8/25更新
