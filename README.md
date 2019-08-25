@@ -9,7 +9,7 @@
 - 操作简单 支持大部分操作
 - 免费轻量开源无广告
 
-### [Preview版下载](https://github.com/YHaoNan/Gesture4Book/raw/master/app/debug/app-debug.apk)
+### [Preview版下载](https://github.com/YHaoNan/Gesture4Book/raw/master/app/build/outputs/apk/debug/app-debug.apk)
 
 ### [使用手册（必看）](./handbook.md)
 
