@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import androidx.annotation.RequiresApi;
@@ -98,6 +99,7 @@ public class TouchBarView extends View{
         if (actionId == MotionEvent.ACTION_DOWN){
             startX = event.getRawX();
             startY = event.getRawY();
+            curHandlerStartTime = new Date().getTime();
         }else if (actionId == MotionEvent.ACTION_MOVE){
             float curX = event.getRawX();
             float curY = event.getRawY();
